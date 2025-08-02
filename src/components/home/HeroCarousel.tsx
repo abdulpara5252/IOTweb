@@ -22,14 +22,14 @@ const slides = [
       "Experience seamless integration and intelligent automation. Our cutting-edge IoT solutions are designed for reliability, scalability, and a smarter tomorrow.",
   },
   {
-    image: "https://placehold.co/1920x800.png",
+    image: "https://placehold.co/1920x801.png",
     aiHint: "smart city",
     title: "Powering Smart Cities",
     description:
       "From intelligent traffic management to sustainable energy grids, our solutions are building the cities of the future.",
   },
   {
-    image: "https://placehold.co/1920x800.png",
+    image: "https://placehold.co/1920x802.png",
     aiHint: "industrial automation",
     title: "Revolutionizing Industries",
     description:
