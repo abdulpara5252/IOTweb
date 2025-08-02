@@ -35,11 +35,15 @@ export async function enhanceLogoClarity(input: EnhanceLogoClarityInput): Promis
 
 const enhanceLogoClarityPrompt = ai.definePrompt({
   name: 'enhanceLogoClarityPrompt',
-  input: {schema: EnhanceLogoClarityInputSchema},
+  input: {schema: z.object({
+      logoDataUri: EnhanceLogoClarityInputSchema.shape.logoDataUri,
+      contentType: z.string(),
+    })
+  },
   output: {schema: EnhanceLogoClarityOutputSchema},
   prompt: [
     {
-      media: {url: '{{{logoDataUri}}}'},
+      media: {url: '{{{logoDataUri}}}', contentType: '{{{contentType}}}'},
     },
     {
       text: 'Enhance the clarity and sharpness of this logo. Ensure it is high resolution and suitable for display on a website, even when rotated.',
@@ -58,7 +62,8 @@ const enhanceLogoClarityFlow = ai.defineFlow(
     outputSchema: EnhanceLogoClarityOutputSchema,
   },
   async input => {
-    const {media} = await enhanceLogoClarityPrompt(input);
+    const contentType = input.logoDataUri.match(/data:(.*);base64,/)?.[1] ?? 'image/png';
+    const {media} = await enhanceLogoClarityPrompt({ ...input, contentType });
     return {enhancedLogoDataUri: media!.url!};
   }
 );
