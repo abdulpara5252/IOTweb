@@ -210,12 +210,6 @@ const ProductSection = ({ product, reverse = false }: { product: Product, revers
 export default function ProductPage() {
   return (
     <div className="bg-background">
-      <header className="text-center pt-16 md:pt-24 pb-8">
-        <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">Our Products</h1>
-        <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Explore our suite of innovative IoT solutions designed for performance and reliability.
-        </p>
-      </header>
       <div className="divide-y divide-border">
         {products.map((product, index) => (
           <div key={product.id} className={index % 2 === 0 ? 'bg-card' : 'bg-background'}>
