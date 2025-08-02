@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
@@ -63,15 +62,8 @@ export default function ProductPage() {
               IOTech Smart Hub
             </h1>
             <p className="text-lg text-muted-foreground mb-6">
-              The central nervous system for your IoT ecosystem. The IOTech Smart Hub provides robust connectivity, powerful local processing, and seamless cloud integration for all your devices.
+              The IOTech Smart Hub is the central nervous system for your IoT ecosystem. It provides robust connectivity, powerful local processing, and seamless cloud integration for all your devices. Discover how our innovative technology can be applied.
             </p>
-            <div className="flex items-center gap-4 mb-8">
-              <p className="text-3xl font-bold text-primary">$199.99</p>
-              <span className="text-sm text-muted-foreground line-through">$249.99</span>
-            </div>
-            <Button size="lg" className="w-full md:w-auto">
-              Add to Cart
-            </Button>
 
             <div className="mt-12">
               <h3 className="text-xl font-bold font-headline mb-4">Key Features</h3>
@@ -112,6 +104,14 @@ export default function ProductPage() {
                       <li>Quick Start Guide</li>
                       <li>Wall Mounting Kit</li>
                     </ul>
+                  </AccordionContent>
+                </AccordionItem>
+                 <AccordionItem value="item-3">
+                  <AccordionTrigger className="font-headline text-lg">Innovative Use Cases</AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-muted-foreground">
+                      Our Smart Hub is designed for versatility. It can be integrated into smart home automation for controlling lights and security, in industrial settings for monitoring machinery, or in agricultural applications to track environmental conditions. Its powerful processing and multi-protocol support make it the ideal backbone for any innovative IoT project.
+                    </p>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
