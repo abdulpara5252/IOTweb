@@ -18,6 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "./actions";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { AnimatedSection } from "@/components/common/AnimatedSection";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -56,100 +57,104 @@ export default function ContactPage() {
 
   return (
     <div className="container mx-auto px-4 py-16 md:py-24">
-      <header className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">Get in Touch</h1>
-        <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Have a question or a project in mind? We'd love to hear from you.
-        </p>
-      </header>
+      <AnimatedSection>
+        <header className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">Get in Touch</h1>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+            Have a question or a project in mind? We'd love to hear from you.
+          </p>
+        </header>
+      </AnimatedSection>
 
-      <div className="grid md:grid-cols-5 gap-12">
-        <div className="md:col-span-2 space-y-8">
-          <Card className="p-6">
-            <CardContent className="flex items-start gap-4 p-0">
-              <Mail className="h-8 w-8 text-primary mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold font-headline">Email</h3>
-                <p className="text-muted-foreground">General Inquiries</p>
-                <a href="mailto:contact@iotech.com" className="text-primary hover:underline">contact@iotech.com</a>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="p-6">
-            <CardContent className="flex items-start gap-4 p-0">
-              <Phone className="h-8 w-8 text-primary mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold font-headline">Phone</h3>
-                <p className="text-muted-foreground">Mon-Fri, 9am-5pm</p>
-                <a href="tel:+1234567890" className="text-primary hover:underline">+1 (234) 567-890</a>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="p-6">
-            <CardContent className="flex items-start gap-4 p-0">
-              <MapPin className="h-8 w-8 text-primary mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold font-headline">Office</h3>
-                <p className="text-muted-foreground">123 Innovation Drive<br/>Tech City, TS 45678</p>
-              </div>
-            </CardContent>
-          </Card>
+      <AnimatedSection>
+        <div className="grid md:grid-cols-5 gap-12">
+          <div className="md:col-span-2 space-y-8">
+            <Card className="p-6">
+              <CardContent className="flex items-start gap-4 p-0">
+                <Mail className="h-8 w-8 text-primary mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold font-headline">Email</h3>
+                  <p className="text-muted-foreground">General Inquiries</p>
+                  <a href="mailto:contact@iotech.com" className="text-primary hover:underline">contact@iotech.com</a>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="p-6">
+              <CardContent className="flex items-start gap-4 p-0">
+                <Phone className="h-8 w-8 text-primary mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold font-headline">Phone</h3>
+                  <p className="text-muted-foreground">Mon-Fri, 9am-5pm</p>
+                  <a href="tel:+1234567890" className="text-primary hover:underline">+1 (234) 567-890</a>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="p-6">
+              <CardContent className="flex items-start gap-4 p-0">
+                <MapPin className="h-8 w-8 text-primary mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold font-headline">Office</h3>
+                  <p className="text-muted-foreground">123 Innovation Drive<br/>Tech City, TS 45678</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="md:col-span-3">
+            <Card className="p-8 shadow-lg">
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Full Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="John Doe" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email Address</FormLabel>
+                        <FormControl>
+                          <Input placeholder="you@example.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Your Message</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Tell us about your project or question..."
+                            className="min-h-[150px]"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
+                    {form.formState.isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
+                </form>
+              </Form>
+            </Card>
+          </div>
         </div>
-        <div className="md:col-span-3">
-          <Card className="p-8 shadow-lg">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Full Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="John Doe" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email Address</FormLabel>
-                      <FormControl>
-                        <Input placeholder="you@example.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Your Message</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Tell us about your project or question..."
-                          className="min-h-[150px]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
-                  {form.formState.isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
-            </Form>
-          </Card>
-        </div>
-      </div>
+      </AnimatedSection>
     </div>
   );
 }
