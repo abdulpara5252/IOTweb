@@ -1,3 +1,6 @@
+
+"use client";
+
 import Image from "next/image";
 import {
   Accordion,
@@ -7,6 +10,8 @@ import {
 } from "@/components/ui/accordion";
 import { CheckCircle, Zap, Wifi, Shield, Thermometer, Droplets, Tractor, Factory } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface ProductFeature {
   icon: LucideIcon;
@@ -143,69 +148,96 @@ const products: Product[] = [
   },
 ];
 
-const ProductSection = ({ product, reverse = false }: { product: Product, reverse?: boolean }) => (
-  <section className="container mx-auto px-4 py-16">
-    <div className={`grid md:grid-cols-2 gap-12 lg:gap-16 items-start ${reverse ? 'md:grid-flow-row-dense' : ''}`}>
-      <div className={`relative aspect-square w-full rounded-lg overflow-hidden shadow-xl ${reverse ? 'md:col-start-2' : ''}`}>
-        <Image
-          src={product.image.src}
-          alt={product.image.alt}
-          fill
-          priority
-          className="object-cover"
-          data-ai-hint={product.image.aiHint}
-        />
-      </div>
+const ProductSection = ({ product, reverse = false }: { product: Product, reverse?: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-      <div className={`${reverse ? 'md:col-start-1' : ''}`}>
-        <span className="text-sm font-semibold text-primary uppercase">{product.id}</span>
-        <h2 className="text-4xl md:text-5xl font-bold font-headline mt-2 mb-4">
-          {product.name}
-        </h2>
-        <p className="text-lg text-muted-foreground mb-6">
-          {product.tagline}
-        </p>
-        <p className="text-muted-foreground mb-6">
-          {product.description}
-        </p>
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-        <div className="mt-8">
-          <h3 className="text-xl font-bold font-headline mb-4">Key Features</h3>
-          <div className="space-y-4">
-            {product.features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-4 p-4 bg-background rounded-lg">
-                <feature.icon className="h-8 w-8 text-primary mt-1 shrink-0" />
-                <div>
-                  <h4 className="font-semibold">{feature.title}</h4>
-                  <p className="text-sm text-muted-foreground">{feature.description}</p>
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return (
+    <section ref={ref} className={cn("container mx-auto px-4 py-16 transition-opacity duration-1000 ease-in", isVisible ? "opacity-100" : "opacity-0")}>
+      <div className={`grid md:grid-cols-2 gap-12 lg:gap-16 items-start ${reverse ? 'md:grid-flow-row-dense' : ''}`}>
+        <div className={`relative aspect-square w-full rounded-lg overflow-hidden shadow-xl ${reverse ? 'md:col-start-2' : ''}`}>
+          <Image
+            src={product.image.src}
+            alt={product.image.alt}
+            fill
+            priority
+            className="object-cover"
+            data-ai-hint={product.image.aiHint}
+          />
+        </div>
+
+        <div className={`${reverse ? 'md:col-start-1' : ''}`}>
+          <span className="text-sm font-semibold text-primary uppercase">{product.id}</span>
+          <h2 className="text-4xl md:text-5xl font-bold font-headline mt-2 mb-4">
+            {product.name}
+          </h2>
+          <p className="text-lg text-muted-foreground mb-6">
+            {product.tagline}
+          </p>
+          <p className="text-muted-foreground mb-6">
+            {product.description}
+          </p>
+
+          <div className="mt-8">
+            <h3 className="text-xl font-bold font-headline mb-4">Key Features</h3>
+            <div className="space-y-4">
+              {product.features.map((feature, index) => (
+                <div key={index} className="flex items-start gap-4 p-4 bg-background rounded-lg">
+                  <feature.icon className="h-8 w-8 text-primary mt-1 shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">{feature.title}</h4>
+                    <p className="text-sm text-muted-foreground">{feature.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <Accordion type="single" collapsible defaultValue="item-1">
+              <AccordionItem value="item-1">
+                <AccordionTrigger className="font-headline text-lg">Technical Specifications</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="list-disc pl-5 text-muted-foreground space-y-2">
+                    {product.specs.map((spec, index) => <li key={index}>{spec}</li>)}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger className="font-headline text-lg">Innovative Use Cases</AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-muted-foreground">{product.useCases}</p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
-
-        <div className="mt-8">
-          <Accordion type="single" collapsible defaultValue="item-1">
-            <AccordionItem value="item-1">
-              <AccordionTrigger className="font-headline text-lg">Technical Specifications</AccordionTrigger>
-              <AccordionContent>
-                <ul className="list-disc pl-5 text-muted-foreground space-y-2">
-                  {product.specs.map((spec, index) => <li key={index}>{spec}</li>)}
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger className="font-headline text-lg">Innovative Use Cases</AccordionTrigger>
-              <AccordionContent>
-                <p className="text-muted-foreground">{product.useCases}</p>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default function ProductPage() {
   return (
