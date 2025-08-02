@@ -16,25 +16,25 @@ const features = [
   {
     title: "Smart Home Hub",
     description: "Unify all your smart devices with our central hub. Control lighting, temperature, and security with a single tap.",
-    image: "https://placehold.co/600x400.png",
+    image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80",
     aiHint: "smart home"
   },
   {
     title: "Industrial Sensors",
     description: "Monitor your operations in real-time with our durable and precise industrial IoT sensors. Prevent downtime and optimize efficiency.",
-    image: "https://placehold.co/600x400.png",
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80",
     aiHint: "industrial sensors"
   },
   {
     title: "Connected Agriculture",
     description: "Transform your farming with data-driven insights. Our sensors monitor soil moisture, crop health, and weather conditions.",
-    image: "https://placehold.co/600x400.png",
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80",
     aiHint: "smart agriculture"
   },
   {
     title: "Wearable Tech",
     description: "Stay connected on the go. Our wearables track fitness, manage notifications, and integrate seamlessly with your digital life.",
-    image: "https://placehold.co/600x400.png",
+    image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
     aiHint: "wearable technology"
   },
 ];

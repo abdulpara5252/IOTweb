@@ -43,7 +43,7 @@ const products: Product[] = [
     tagline: "The Central Nervous System for Your IoT Ecosystem",
     description: "The IOTech Smart Hub provides robust connectivity, powerful local processing, and seamless cloud integration for all your devices. It's the reliable backbone for any smart project.",
     image: {
-      src: "https://placehold.co/800x800.png",
+      src: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
       alt: "IOTech Smart Hub",
       aiHint: "iot hub",
     },
@@ -80,7 +80,7 @@ const products: Product[] = [
     tagline: "Data-Driven Farming for Higher Yields",
     description: "Optimize your crop management with real-time data on soil health, environmental conditions, and plant vitality. Our durable sensors are built to withstand harsh agricultural environments.",
     image: {
-      src: "https://placehold.co/800x800.png",
+      src: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80",
       alt: "Smart Agriculture Sensor",
       aiHint: "smart agriculture",
     },
@@ -117,7 +117,7 @@ const products: Product[] = [
     tagline: "Connecting Your Factory to the Future",
     description: "Bridge the gap between your operational technology (OT) and IT infrastructure. Our Industrial Gateway securely collects data from legacy and modern machinery, enabling predictive maintenance and process optimization.",
     image: {
-      src: "https://placehold.co/800x800.png",
+      src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
       alt: "Industrial IoT Gateway",
       aiHint: "industrial iot",
     },

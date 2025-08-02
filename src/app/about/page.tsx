@@ -7,20 +7,23 @@ const teamMembers = [
   {
     name: "Jane Doe",
     role: "CEO & Founder",
-    image: "https://placehold.co/400x400.png",
-    aiHint: "professional portrait"
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    aiHint: "professional portrait",
+    bio: "Visionary leader with 15+ years in IoT and smart technology. Passionate about empowering teams and building innovative solutions."
   },
   {
     name: "John Smith",
     role: "Chief Technology Officer",
-    image: "https://placehold.co/400x400.png",
-    aiHint: "professional portrait"
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    aiHint: "professional portrait",
+    bio: "Tech enthusiast and architect of scalable IoT platforms. Loves solving complex problems and mentoring future tech leaders."
   },
   {
     name: "Emily White",
     role: "Head of Product",
-    image: "https://placehold.co/400x400.png",
-    aiHint: "professional portrait"
+    image: "https://randomuser.me/api/portraits/women/65.jpg",
+    aiHint: "professional portrait",
+    bio: "Product strategist with a knack for user-centric design. Drives product vision from concept to launch with creativity and focus."
   },
 ];
 
@@ -48,7 +51,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="https://placehold.co/800x600.png"
+                src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=800&q=80"
                 alt="Our team working"
                 fill
                 className="object-cover"
@@ -87,7 +90,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
                <Image
-                src="https://placehold.co/800x600.png"
+                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80"
                 alt="Abstract representation of values"
                 fill
                 className="object-cover"
@@ -106,24 +109,33 @@ export default function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {teamMembers.map((member) => (
-              <Card key={member.name} className="text-center hover:shadow-xl transition-shadow duration-300">
-                <CardHeader>
-                  <div className="relative h-48 w-48 mx-auto rounded-full overflow-hidden mb-4">
-                    <Image
-                      src={member.image}
-                      alt={`Portrait of ${member.name}`}
-                      fill
-                      className="object-cover"
-                      data-ai-hint={member.aiHint}
-                    />
-                  </div>
-                  <CardTitle className="font-headline">{member.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-primary">{member.role}</p>
-                </CardContent>
-              </Card>
-            ))}
+  <div key={member.name} className="flip-card h-80 w-full">
+    <div className="flip-card-inner h-full w-full">
+      {/* Front Side */}
+      <div className="flip-card-front h-full w-full flex flex-col items-center justify-center text-center hover:shadow-xl transition-shadow duration-300 bg-card rounded-xl p-6">
+        <div className="relative h-32 w-32 mx-auto rounded-full overflow-hidden mb-4">
+          <Image
+            src={member.image}
+            alt={`Portrait of ${member.name}`}
+            fill
+            className="object-cover"
+            data-ai-hint={member.aiHint}
+          />
+        </div>
+        <div>
+          <h3 className="font-headline text-xl font-bold mb-1">{member.name}</h3>
+          <p className="text-primary mb-2">{member.role}</p>
+        </div>
+      </div>
+      {/* Back Side */}
+      <div className="flip-card-back h-full w-full flex flex-col items-center justify-center text-center bg-card rounded-xl p-6">
+        <h3 className="font-headline text-xl font-bold mb-2">{member.name}</h3>
+        <p className="text-muted-foreground mb-4">{member.role}</p>
+        <p className="text-sm">{member.bio}</p>
+      </div>
+    </div>
+  </div>
+))}
           </div>
         </section>
       </AnimatedSection>

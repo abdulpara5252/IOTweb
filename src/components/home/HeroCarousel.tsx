@@ -15,21 +15,21 @@ import {
 
 const slides = [
   {
-    image: "https://placehold.co/1920x800.png",
+    image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1920&q=80",
     aiHint: "iot devices",
     title: "Connect Your World with IOTech",
     description:
       "Experience seamless integration and intelligent automation. Our cutting-edge IoT solutions are designed for reliability, scalability, and a smarter tomorrow.",
   },
   {
-    image: "https://placehold.co/1920x801.png",
+    image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1920&q=80",
     aiHint: "smart city",
     title: "Powering Smart Cities",
     description:
       "From intelligent traffic management to sustainable energy grids, our solutions are building the cities of the future.",
   },
   {
-    image: "https://placehold.co/1920x802.png",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80",
     aiHint: "industrial automation",
     title: "Revolutionizing Industries",
     description:
@@ -39,7 +39,7 @@ const slides = [
 
 export default function HeroCarousel() {
   return (
-    <section className="relative w-full">
+    <section className="relative w-full overflow-x-hidden max-w-full">
       <Carousel
         opts={{
           align: "start",
@@ -51,7 +51,7 @@ export default function HeroCarousel() {
             stopOnInteraction: true,
           }),
         ]}
-        className="w-full"
+        className="w-full max-w-full overflow-x-hidden"
       >
         <CarouselContent>
           {slides.map((slide, index) => (
