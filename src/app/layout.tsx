@@ -3,6 +3,7 @@ import './globals.css';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 import { Toaster } from "@/components/ui/toaster";
+import { AnimatedSection } from '@/components/common/AnimatedSection';
 
 export const metadata: Metadata = {
   title: 'IOT Product Website',
@@ -25,7 +26,9 @@ export default function RootLayout({
         <div className="relative flex min-h-screen flex-col bg-background">
           <Header />
           <main className="flex-1">{children}</main>
-          <Footer />
+          <AnimatedSection>
+            <Footer />
+          </AnimatedSection>
         </div>
         <Toaster />
       </body>
