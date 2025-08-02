@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import Image from "next/image";
@@ -12,6 +13,7 @@ import { CheckCircle, Zap, Wifi, Shield, Thermometer, Droplets, Tractor, Factory
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface ProductFeature {
   icon: LucideIcon;
@@ -175,37 +177,41 @@ const ProductSection = ({ product, reverse = false }: { product: Product, revers
   }, []);
 
   return (
-    <section ref={ref} className={cn("container mx-auto px-4 py-16 transition-opacity duration-1000 ease-in", isVisible ? "opacity-100" : "opacity-0")}>
-      <div className={`grid md:grid-cols-2 gap-12 lg:gap-16 items-start ${reverse ? 'md:grid-flow-row-dense' : ''}`}>
-        <div className={`relative aspect-square w-full rounded-lg overflow-hidden shadow-xl ${reverse ? 'md:col-start-2' : ''}`}>
-          <Image
-            src={product.image.src}
-            alt={product.image.alt}
-            fill
-            priority
-            className="object-cover"
-            data-ai-hint={product.image.aiHint}
-          />
+    <section ref={ref} className={cn("container mx-auto px-4 py-24 transition-opacity duration-1000 ease-in", isVisible ? "opacity-100" : "opacity-0")}>
+      <div className={`grid md:grid-cols-12 gap-12 items-center ${reverse ? 'md:grid-flow-row-dense' : ''}`}>
+        <div className={`md:col-span-7 relative ${reverse ? 'md:col-start-6' : ''}`}>
+          <div className="relative aspect-video w-full rounded-lg overflow-hidden shadow-2xl">
+            <Image
+              src={product.image.src}
+              alt={product.image.alt}
+              fill
+              priority
+              className="object-cover"
+              data-ai-hint={product.image.aiHint}
+            />
+          </div>
         </div>
 
-        <div className={`${reverse ? 'md:col-start-1' : ''}`}>
-          <span className="text-sm font-semibold text-primary uppercase">{product.id}</span>
+        <div className={`md:col-span-5 ${reverse ? 'md:col-start-1 md:row-start-1' : ''}`}>
+          <span className="text-sm font-semibold text-primary uppercase tracking-wider">{product.id}</span>
           <h2 className="text-4xl md:text-5xl font-bold font-headline mt-2 mb-4">
             {product.name}
           </h2>
           <p className="text-lg text-muted-foreground mb-6">
             {product.tagline}
           </p>
-          <p className="text-muted-foreground mb-6">
-            {product.description}
-          </p>
+        </div>
+      </div>
 
-          <div className="mt-8">
-            <h3 className="text-xl font-bold font-headline mb-4">Key Features</h3>
+      <div className="mt-16 grid md:grid-cols-2 gap-12">
+        <div>
+           <h3 className="text-2xl font-bold font-headline mb-6">Key Features</h3>
             <div className="space-y-4">
               {product.features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-4 p-4 bg-background rounded-lg">
-                  <feature.icon className="h-8 w-8 text-primary mt-1 shrink-0" />
+                <div key={index} className="flex items-start gap-4">
+                  <div className="flex-shrink-0 h-10 w-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center">
+                    <feature.icon className="h-6 w-6" />
+                  </div>
                   <div>
                     <h4 className="font-semibold">{feature.title}</h4>
                     <p className="text-sm text-muted-foreground">{feature.description}</p>
@@ -213,26 +219,32 @@ const ProductSection = ({ product, reverse = false }: { product: Product, revers
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className="mt-8">
-            <Accordion type="single" collapsible defaultValue="item-1">
-              <AccordionItem value="item-1">
-                <AccordionTrigger className="font-headline text-lg">Technical Specifications</AccordionTrigger>
+        </div>
+        <div>
+          <Card className="p-6 bg-card">
+             <Accordion type="single" collapsible defaultValue="item-1">
+              <AccordionItem value="item-1" className="border-b-0">
+                <AccordionTrigger className="font-headline text-xl pt-0">Technical Specifications</AccordionTrigger>
                 <AccordionContent>
                   <ul className="list-disc pl-5 text-muted-foreground space-y-2">
                     {product.specs.map((spec, index) => <li key={index}>{spec}</li>)}
                   </ul>
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger className="font-headline text-lg">Innovative Use Cases</AccordionTrigger>
+              <AccordionItem value="item-2" className="border-b-0">
+                <AccordionTrigger className="font-headline text-xl">Innovative Use Cases</AccordionTrigger>
                 <AccordionContent>
                   <p className="text-muted-foreground">{product.useCases}</p>
                 </AccordionContent>
               </AccordionItem>
+              <AccordionItem value="item-3" className="border-b-0">
+                <AccordionTrigger className="font-headline text-xl">About This Product</AccordionTrigger>
+                <AccordionContent>
+                   <p className="text-muted-foreground">{product.description}</p>
+                </AccordionContent>
+              </AccordionItem>
             </Accordion>
-          </div>
+          </Card>
         </div>
       </div>
     </section>
@@ -242,14 +254,21 @@ const ProductSection = ({ product, reverse = false }: { product: Product, revers
 export default function ProductPage() {
   return (
     <div className="bg-background">
+      <header className="bg-card py-24">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold font-headline text-primary">Our Products</h1>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+            Explore our suite of IoT solutions, engineered for performance, reliability, and seamless integration.
+          </p>
+        </div>
+      </header>
       <div className="divide-y divide-border">
         {products.map((product, index) => (
-          <div key={product.id} className={index % 2 === 0 ? 'bg-card' : 'bg-background'}>
-            <ProductSection
-              product={product}
-              reverse={index % 2 !== 0}
-            />
-          </div>
+          <ProductSection
+            key={product.id}
+            product={product}
+            reverse={index % 2 !== 0}
+          />
         ))}
       </div>
     </div>
