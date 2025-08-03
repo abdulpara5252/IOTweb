@@ -18,6 +18,8 @@ import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "./actions";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { generateStructuredData } from '@/lib/seo';
+import { StructuredData } from '@/components/seo/StructuredData';
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -27,6 +29,51 @@ const formSchema = z.object({
 
 export default function ContactPage() {
   const { toast } = useToast();
+  
+  const breadcrumbData = generateStructuredData({
+    type: 'BreadcrumbList',
+    data: {
+      items: [
+        { name: 'Home', url: '/' },
+        { name: 'Contact', url: '/contact' }
+      ]
+    }
+  });
+
+  const contactData = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact IOTech',
+    description: 'Get in touch with IOTech for IoT solutions, technical support, and partnership opportunities.',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'IOTech',
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+1-555-0123',
+          contactType: 'customer service',
+          email: 'contact@iotech.com',
+          availableLanguage: 'English'
+        },
+        {
+          '@type': 'ContactPoint',
+          telephone: '+1-555-0124',
+          contactType: 'technical support',
+          email: 'support@iotech.com',
+          availableLanguage: 'English'
+        }
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '123 Tech Street',
+        addressLocality: 'San Francisco',
+        addressRegion: 'CA',
+        postalCode: '94105',
+        addressCountry: 'US'
+      }
+    }
+  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,6 +103,8 @@ export default function ContactPage() {
 
   return (
     <div className="container mx-auto px-4 py-16 md:py-24">
+      <StructuredData data={breadcrumbData} />
+      <StructuredData data={contactData} />
       <header className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">Get in Touch</h1>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">

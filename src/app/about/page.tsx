@@ -1,7 +1,18 @@
+import { Metadata } from 'next';
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 import { AnimatedSection } from "@/components/common/AnimatedSection";
+import { generateMetadata, generateStructuredData } from '@/lib/seo';
+import { StructuredData } from '@/components/seo/StructuredData';
+
+export const metadata: Metadata = generateMetadata({
+  title: 'About IOTech - Leading IoT Innovation & Smart Technology Solutions',
+  description: 'Learn about IOTech\'s mission to revolutionize IoT technology. Meet our expert team, discover our values, and see how we\'re building the future of connected devices and smart solutions.',
+  keywords: ['about IOTech', 'IoT company', 'smart technology team', 'IoT innovation', 'connected devices company', 'IoT leadership'],
+  url: '/about',
+  type: 'website'
+});
 
 const teamMembers = [
   {
@@ -35,8 +46,34 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const breadcrumbData = generateStructuredData({
+    type: 'BreadcrumbList',
+    data: {
+      items: [
+        { name: 'Home', url: '/' },
+        { name: 'About', url: '/about' }
+      ]
+    }
+  });
+
+  const teamData = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'IOTech',
+    description: 'Pioneers in the Internet of Things, dedicated to creating intelligent, connected solutions that empower businesses and individuals.',
+    employee: teamMembers.map(member => ({
+      '@type': 'Person',
+      name: member.name,
+      jobTitle: member.role,
+      description: member.bio,
+      image: member.image
+    }))
+  };
+
   return (
     <div className="container mx-auto px-4 py-16 md:py-24">
+      <StructuredData data={breadcrumbData} />
+      <StructuredData data={teamData} />
       <AnimatedSection>
         <header className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">About IOTech</h1>

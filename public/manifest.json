@@ -1,0 +1,29 @@
+{
+  "name": "IOTech - Smart IoT Solutions",
+  "short_name": "IOTech",
+  "description": "Innovative IoT solutions for smart homes, industries, and connected devices",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "categories": ["technology", "business", "productivity"],
+  "lang": "en-US"
+}

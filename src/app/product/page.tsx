@@ -14,6 +14,8 @@ import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
+import { generateStructuredData } from '@/lib/seo';
+import { StructuredData } from '@/components/seo/StructuredData';
 
 interface ProductFeature {
   icon: LucideIcon;
@@ -252,8 +254,40 @@ const ProductSection = ({ product, reverse = false }: { product: Product, revers
 };
 
 export default function ProductPage() {
+  const breadcrumbData = generateStructuredData({
+    type: 'BreadcrumbList',
+    data: {
+      items: [
+        { name: 'Home', url: '/' },
+        { name: 'Products', url: '/product' }
+      ]
+    }
+  });
+
+  const productListData = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'IOTech IoT Products',
+    description: 'Complete range of IoT products and solutions',
+    numberOfItems: products.length,
+    itemListElement: products.map((product, index) => ({
+      '@type': 'Product',
+      position: index + 1,
+      name: product.name,
+      description: product.description,
+      brand: {
+        '@type': 'Brand',
+        name: 'IOTech'
+      },
+      category: 'IoT Devices',
+      url: `/product#${product.id}`
+    }))
+  };
+
   return (
     <div className="bg-background">
+      <StructuredData data={breadcrumbData} />
+      <StructuredData data={productListData} />
       <header className="bg-card py-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold font-headline text-primary">Our Products</h1>
