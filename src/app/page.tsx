@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
-import ProductCarousel from '@/components/home/ProductCarousel';
+import Sectors from '@/components/home/Sectors';
 import ClientLogos from '@/components/home/ClientLogos';
 import { AnimatedSection } from '@/components/common/AnimatedSection';
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
@@ -31,7 +31,7 @@ export default function Home() {
         <HeroSection />
       </AnimatedSection>
       <AnimatedSection>
-        <ProductCarousel />
+        <Sectors />
       </AnimatedSection>
       <AnimatedSection>
         <ClientLogos />
