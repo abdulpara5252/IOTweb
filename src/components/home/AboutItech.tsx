@@ -20,7 +20,6 @@ const AboutItech = () => {
 
           {/* Right Side - Content */}
           <div className="space-y-6">
-            {/* Small Heading */}
             <div className="space-y-2">
               <h3 className="text-sm font-medium text-blue-500 uppercase tracking-wider">
                 About iTech
