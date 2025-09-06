@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -21,11 +22,12 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-screen-2xl items-center">
-        <div className="mr-4 flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Cpu className="h-6 w-6 text-primary" />
-            <span className="font-bold font-headline">IOTech</span>
+      <div className="container flex h-16 max-w-screen-2xl items-center">
+        <div className="flex flex-1 items-center">
+          <Link href="/" className="mr-6 flex items-center space-x-4">
+            {/* <Cpu className="h-6 w-6 text-primary" />
+            <span className="font-bold font-headline">IOTech</span> */}
+            <Image src="/assets/images/Logo2.svg" alt="Logo" width={90} height={40}/>
           </Link>
           <nav className="hidden gap-6 text-sm md:flex">
             {navLinks.map(({ href, label }) => (
@@ -42,7 +44,7 @@ export function Header() {
             ))}
           </nav>
         </div>
-        <div className="flex flex-1 items-center justify-end">
+        <div className="flex items-center justify-end">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button
@@ -59,8 +61,7 @@ export function Header() {
                 className="mb-6 flex items-center"
                 onClick={() => setIsOpen(false)}
               >
-                <Cpu className="mr-2 h-6 w-6 text-primary" />
-                <span className="font-bold font-headline">IOTech</span>
+                <Image src="/assets/images/Logo2.svg" alt="Logo" width={90} height={40} />
               </Link>
               <div className="flex flex-col space-y-3">
                 {navLinks.map(({ href, label }) => (

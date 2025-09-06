@@ -5,6 +5,7 @@ import { CheckCircle } from "lucide-react";
 import { AnimatedSection } from "@/components/common/AnimatedSection";
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/seo/StructuredData';
+import ParticleNetworkAnimation from '@/components/common/ParticleNetworkAnimation';
 
 export const metadata: Metadata = generateMetadata({
   title: 'About IOTech - Leading IoT Innovation & Smart Technology Solutions',
@@ -71,9 +72,11 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-16 md:py-24">
-      <StructuredData data={breadcrumbData} />
-      <StructuredData data={teamData} />
+    <>
+      <ParticleNetworkAnimation />
+      <div className="container mx-auto px-4 py-16 md:py-24">
+        <StructuredData data={breadcrumbData} />
+        <StructuredData data={teamData} />
       <AnimatedSection>
         <header className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">About IOTech</h1>
@@ -176,6 +179,7 @@ export default function AboutPage() {
           </div>
         </section>
       </AnimatedSection>
-    </div>
+      </div>
+    </>
   );
 }

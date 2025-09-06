@@ -1,0 +1,61 @@
+.particle-network-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; // don’t block clicks
+  overflow: hidden;
+}
+
+.glow {
+  z-index: -1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-image: radial-gradient(
+    circle closest-side,
+    rgba(255, 255, 255, 0.12), /* soft white */
+    transparent
+  );
+  mix-blend-mode: screen; /* soft blending */
+  border-radius: 50%;
+}
+
+$duration: 35s; // slower so it feels calm
+
+/* just 2 glow layers instead of 3 */
+.glow-1 {
+  width: 120vw;
+  height: 120vh;
+  margin-top: -60vh;
+  margin-left: -60vw;
+  animation: glow-1-move $duration linear infinite both;
+}
+
+@keyframes glow-1-move {
+  from {
+    transform: translate(-50%, 50%);
+  }
+  to {
+    transform: translate(50%, -50%);
+  }
+}
+
+// .glow-2 {
+//   width: 100vw;
+//   height: 100vh;
+//   margin-top: -50vh;
+//   margin-left: -50vw;
+//   animation: glow-2-move $duration linear $duration/2 infinite both;
+// }
+
+// @keyframes glow-2-move {
+//   from {
+//     transform: translate(50%, 50%);
+//   }
+//   to {
+//     transform: translate(-50%, -50%);
+//   }
+// }

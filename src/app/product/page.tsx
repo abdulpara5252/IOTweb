@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/seo/StructuredData';
+import ParticleNetworkAnimation from '@/components/common/ParticleNetworkAnimation';
 
 interface ProductFeature {
   icon: LucideIcon;
@@ -285,9 +286,11 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="bg-background">
-      <StructuredData data={breadcrumbData} />
-      <StructuredData data={productListData} />
+    <>
+      <ParticleNetworkAnimation />
+      <div className="bg-background">
+        <StructuredData data={breadcrumbData} />
+        <StructuredData data={productListData} />
       <header className="bg-card py-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold font-headline text-primary">Our Products</h1>
@@ -305,6 +308,7 @@ export default function ProductPage() {
           />
         ))}
       </div>
-    </div>
+      </div>
+    </>
   );
 }

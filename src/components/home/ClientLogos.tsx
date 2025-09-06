@@ -120,14 +120,6 @@ export default function ClientLogos() {
             ))}
           </div>
         </div>
-
-        <div className="mt-12 text-center">
-          <Button size="lg" onClick={handleEnhanceLogos} disabled={isEnhancingAll}>
-            <Sparkles className="mr-2 h-5 w-5" />
-            {isEnhancingAll ? "Enhancing..." : "Enhance Logos with AI"}
-          </Button>
-          <p className="text-sm mt-2 text-muted-foreground">See our AI improve logo clarity for better display.</p>
-        </div>
       </div>
     </section>
   );

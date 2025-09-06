@@ -15,27 +15,28 @@ import {
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1920&q=80",
+    image: "/assets/images/MainBanner.jpg",
     aiHint: "iot devices",
-    title: "Connect Your World with IOTech",
+    title: "",
     description:
-      "Experience seamless integration and intelligent automation. Our cutting-edge IoT solutions are designed for reliability, scalability, and a smarter tomorrow.",
+      "",
   },
   {
-    image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1920&q=80",
-    aiHint: "smart city",
-    title: "Powering Smart Cities",
+    image: "/assets/images/MainBanner.jpg",
+    aiHint: "iot devices",
+    title: "",
     description:
-      "From intelligent traffic management to sustainable energy grids, our solutions are building the cities of the future.",
+      "",
   },
   {
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80",
-    aiHint: "industrial automation",
-    title: "Revolutionizing Industries",
+    image: "/assets/images/MainBanner.jpg",
+    aiHint: "iot devices",
+    title: "",
     description:
-      "Boost productivity and safety with our industrial IoT platform, providing real-time monitoring and predictive maintenance.",
+      "",
   },
 ];
+
 
 export default function HeroCarousel() {
   return (
@@ -62,7 +63,7 @@ export default function HeroCarousel() {
                   alt={slide.title}
                   fill
                   priority={index === 0}
-                  className="object-cover"
+                  className="object-cover relative z-10"
                   data-ai-hint={slide.aiHint}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -74,14 +75,14 @@ export default function HeroCarousel() {
                     <p className="text-lg md:text-xl text-slate-200 mb-8 max-w-3xl mx-auto drop-shadow-md">
                       {slide.description}
                     </p>
-                    <div className="flex justify-center gap-4">
+                    {/* <div className="flex justify-center gap-4">
                       <Button asChild size="lg">
                         <Link href="/product">Discover Our Product</Link>
                       </Button>
                       <Button asChild size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-primary">
                         <Link href="/contact">Request a Demo</Link>
                       </Button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

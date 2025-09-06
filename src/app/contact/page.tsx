@@ -20,6 +20,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/seo/StructuredData';
+import ParticleNetworkAnimation from '@/components/common/ParticleNetworkAnimation';
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -102,9 +103,11 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-16 md:py-24">
-      <StructuredData data={breadcrumbData} />
-      <StructuredData data={contactData} />
+    <>
+      <ParticleNetworkAnimation />
+      <div className="container mx-auto px-4 py-16 md:py-24">
+        <StructuredData data={breadcrumbData} />
+        <StructuredData data={contactData} />
       <header className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">Get in Touch</h1>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -199,6 +202,7 @@ export default function ContactPage() {
           </Card>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

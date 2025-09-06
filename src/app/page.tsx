@@ -5,6 +5,7 @@ import ClientLogos from '@/components/home/ClientLogos';
 import { AnimatedSection } from '@/components/common/AnimatedSection';
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/seo/StructuredData';
+import ParticleNetworkAnimation from '@/components/common/ParticleNetworkAnimation';
 
 export const metadata: Metadata = generateMetadata({
   title: 'IOTech - Revolutionary IoT Solutions for Smart Connected World',
@@ -26,6 +27,7 @@ export default function Home() {
 
   return (
     <>
+      <ParticleNetworkAnimation />
       <StructuredData data={breadcrumbData} />
       <AnimatedSection>
         <HeroSection />
