@@ -21,7 +21,7 @@ const AboutItech = () => {
           {/* Right Side - Content */}
           <div className="space-y-6">
             <div className="space-y-2">
-              <h3 className="text-sm font-medium text-blue-500 uppercase tracking-wider">
+              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
                 About iTech
               </h3>
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 font-headline">
@@ -47,11 +47,11 @@ const AboutItech = () => {
                 technology yet cost-effective products to measure, monitor and control.
               </p>
 
-              <p className="text-base">
+              {/* <p className="text-base">
                 <strong>Contact us</strong> for more information on how iTech Remote Monitoring systems 
                 can improve your Networked System, also with any Questions or for a free Proposal. 
                 We look forward to the opportunity to work with you!
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

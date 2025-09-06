@@ -78,6 +78,20 @@
   }
 }
 
+@keyframes scroll-slow {
+  to {
+    transform: translate(calc(-50% - 0.5rem));
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+.animate-scroll-slow {
+  animation: scroll 40s linear infinite;
+}
+
 /* Card flip effect for team cards */
 .flip-card {
   perspective: 1200px;
