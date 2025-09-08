@@ -55,13 +55,13 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="pr-0">
-                <Link
+                {/* <Link
                   href="/"
                   className="mb-6 flex items-center"
                   onClick={() => setIsOpen(false)}
                 >
                   <Image src="/assets/images/Logo2.svg" alt="Logo" width={90} height={40} />
-                </Link>
+                </Link> */}
                 <div className="flex flex-col space-y-3">
                   {navLinks.map(({ href, label }) => (
                     <Link
