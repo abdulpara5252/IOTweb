@@ -8,8 +8,8 @@ import { StructuredData } from '@/components/seo/StructuredData';
 import ParticleNetworkAnimation from '@/components/common/ParticleNetworkAnimation';
 
 export const metadata: Metadata = generateMetadata({
-  title: 'IOTech - Revolutionary IoT Solutions for Smart Connected World',
-  description: 'Transform your world with IOTech\'s cutting-edge IoT solutions. Smart hubs, connected devices, and innovative technology for homes, industries, and businesses. Experience the future of connectivity today.',
+  title: 'ItechInnovation - Revolutionary IoT Solutions for Smart Connected World',
+  description: 'Transform your world with ItechInnovation\'s cutting-edge IoT solutions. Smart hubs, connected devices, and innovative technology for homes, industries, and businesses. Experience the future of connectivity today.',
   keywords: ['IoT hub', 'smart home technology', 'connected devices', 'IoT platform', 'smart solutions', 'internet of things'],
   url: '/',
   type: 'website'

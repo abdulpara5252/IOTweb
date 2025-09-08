@@ -14,11 +14,11 @@ export interface SEOConfig {
 }
 
 const defaultSEO = {
-  siteName: 'IOTech - Smart IoT Solutions',
-  siteUrl: 'https://iotech.com', // Replace with your actual domain
+  siteName: 'ItechInnovation - Smart IoT Solutions',
+  siteUrl: 'https://ItechInnovation.com', // Replace with your actual domain
   defaultImage: '/images/og-default.jpg',
-  twitterHandle: '@iotech', // Replace with your Twitter handle
-  author: 'IOTech Team',
+  twitterHandle: '@ItechInnovation', // Replace with your Twitter handle
+  author: 'ItechInnovation Team',
   keywords: [
     'IoT',
     'Internet of Things',
@@ -147,9 +147,9 @@ export function generateStructuredData(config: {
           availableLanguage: 'English'
         },
         sameAs: [
-          'https://twitter.com/iotech', // Replace with actual social links
-          'https://linkedin.com/company/iotech',
-          'https://facebook.com/iotech'
+          'https://twitter.com/ItechInnovation', // Replace with actual social links
+          'https://linkedin.com/company/ItechInnovation',
+          'https://facebook.com/ItechInnovation'
         ],
         ...config.data
       };

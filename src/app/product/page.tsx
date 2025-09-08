@@ -42,12 +42,12 @@ interface Product {
 const products: Product[] = [
   {
     id: "iot-hub-001",
-    name: "IOTech Smart Hub",
+    name: "ItechInnovation Smart Hub",
     tagline: "The Central Nervous System for Your IoT Ecosystem",
-    description: "The IOTech Smart Hub provides robust connectivity, powerful local processing, and seamless cloud integration for all your devices. It's the reliable backbone for any smart project.",
+    description: "The ItechInnovation Smart Hub provides robust connectivity, powerful local processing, and seamless cloud integration for all your devices. It's the reliable backbone for any smart project.",
     image: {
       src: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
-      alt: "IOTech Smart Hub",
+      alt: "ItechInnovation Smart Hub",
       aiHint: "iot hub",
     },
     features: [
@@ -268,7 +268,7 @@ export default function ProductPage() {
   const productListData = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'IOTech IoT Products',
+    name: 'ItechInnovation IoT Products',
     description: 'Complete range of IoT products and solutions',
     numberOfItems: products.length,
     itemListElement: products.map((product, index) => ({
@@ -278,7 +278,7 @@ export default function ProductPage() {
       description: product.description,
       brand: {
         '@type': 'Brand',
-        name: 'IOTech'
+        name: 'ItechInnovation'
       },
       category: 'IoT Devices',
       url: `/product#${product.id}`

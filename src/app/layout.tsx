@@ -8,8 +8,8 @@ import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/seo/StructuredData';
 
 export const metadata: Metadata = generateMetadata({
-  title: 'IOTech - Smart IoT Solutions & Connected Devices',
-  description: 'Discover innovative IoT solutions with IOTech. Smart hubs, connected devices, and cutting-edge IoT technology for homes, industries, and businesses. Transform your world with intelligent connectivity.',
+  title: 'ItechInnovation - Smart IoT Solutions & Connected Devices',
+  description: 'Discover innovative IoT solutions with ItechInnovation. Smart hubs, connected devices, and cutting-edge IoT technology for homes, industries, and businesses. Transform your world with intelligent connectivity.',
   keywords: ['IoT platform', 'smart devices', 'connected technology', 'IoT solutions', 'smart home', 'industrial IoT'],
   url: '/',
   type: 'website'

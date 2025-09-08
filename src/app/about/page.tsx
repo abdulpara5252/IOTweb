@@ -8,9 +8,9 @@ import { StructuredData } from '@/components/seo/StructuredData';
 import ParticleNetworkAnimation from '@/components/common/ParticleNetworkAnimation';
 
 export const metadata: Metadata = generateMetadata({
-  title: 'About IOTech - Leading IoT Innovation & Smart Technology Solutions',
-  description: 'Learn about IOTech\'s mission to revolutionize IoT technology. Meet our expert team, discover our values, and see how we\'re building the future of connected devices and smart solutions.',
-  keywords: ['about IOTech', 'IoT company', 'smart technology team', 'IoT innovation', 'connected devices company', 'IoT leadership'],
+  title: 'About ItechInnovation - Leading IoT Innovation & Smart Technology Solutions',
+  description: 'Learn about ItechInnovation\'s mission to revolutionize IoT technology. Meet our expert team, discover our values, and see how we\'re building the future of connected devices and smart solutions.',
+  keywords: ['about ItechInnovation', 'IoT company', 'smart technology team', 'IoT innovation', 'connected devices company', 'IoT leadership'],
   url: '/about',
   type: 'website'
 });
@@ -60,7 +60,7 @@ export default function AboutPage() {
   const teamData = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'IOTech',
+    name: 'ItechInnovation',
     description: 'Pioneers in the Internet of Things, dedicated to creating intelligent, connected solutions that empower businesses and individuals.',
     employee: teamMembers.map(member => ({
       '@type': 'Person',
@@ -79,7 +79,7 @@ export default function AboutPage() {
       <StructuredData data={teamData} />
       <AnimatedSection>
         <header className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">About IOTech</h1>
+          <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">About ItechInnovation</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
             We are pioneers in the Internet of Things, dedicated to creating intelligent, connected solutions that empower businesses and individuals.
           </p>
@@ -101,7 +101,7 @@ export default function AboutPage() {
             <div>
               <h2 className="text-3xl font-bold font-headline mb-4">Our Story</h2>
               <p className="text-muted-foreground mb-4">
-                Founded in 2020, IOTech was born from a vision to simplify the complexity of the digital world. Our founders saw the potential for connected devices to revolutionize industries, but also recognized the need for a platform that was both powerful and accessible. We've been on a mission ever since to build that platform and help our clients unlock the full potential of IoT.
+                Founded in 2020, ItechInnovation was born from a vision to simplify the complexity of the digital world. Our founders saw the potential for connected devices to revolutionize industries, but also recognized the need for a platform that was both powerful and accessible. We've been on a mission ever since to build that platform and help our clients unlock the full potential of IoT.
               </p>
               <p className="text-muted-foreground">
                 From a small garage startup to a globally recognized leader, our journey has been driven by passion, persistence, and a relentless pursuit of excellence.
