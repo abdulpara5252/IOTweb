@@ -62,8 +62,8 @@ class ParticleNetwork {
     velocity: 1,
     density: 15000,
     netLineDistance: 200,
-    netLineColor: "#929292",
-    particleColors: ["#aaa"],
+    netLineColor: "#ccc9c9",
+    particleColors: ["#c0bfbf"],
   };
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;

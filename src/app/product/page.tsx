@@ -288,9 +288,9 @@ export default function ProductPage() {
   return (
     <>
       <ParticleNetworkAnimation />
-      <div className="bg-background">
-        <StructuredData data={breadcrumbData} />
-        <StructuredData data={productListData} />
+    <div className="bg-background">
+      <StructuredData data={breadcrumbData} />
+      <StructuredData data={productListData} />
       <header className="bg-card py-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold font-headline text-primary">Our Products</h1>
@@ -308,7 +308,7 @@ export default function ProductPage() {
           />
         ))}
       </div>
-      </div>
+    </div>
     </>
   );
 }

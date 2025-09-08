@@ -74,9 +74,9 @@ export default function AboutPage() {
   return (
     <>
       <ParticleNetworkAnimation />
-      <div className="container mx-auto px-4 py-16 md:py-24">
-        <StructuredData data={breadcrumbData} />
-        <StructuredData data={teamData} />
+    <div className="container mx-auto px-4 py-16 md:py-24">
+      <StructuredData data={breadcrumbData} />
+      <StructuredData data={teamData} />
       <AnimatedSection>
         <header className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">About IOTech</h1>
@@ -179,7 +179,7 @@ export default function AboutPage() {
           </div>
         </section>
       </AnimatedSection>
-      </div>
+    </div>
     </>
   );
 }

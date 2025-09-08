@@ -1,6 +1,7 @@
-import { Cpu, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -8,11 +9,10 @@ export function Footer() {
       <div className="container grid grid-cols-2 md:grid-cols-4 gap-8 py-12">
         <div className="col-span-2 md:col-span-1">
           <Link href="/" className="flex items-center space-x-2 mb-4">
-            <Cpu className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold font-headline">IOTech</span>
+            <Image src="https://res.cloudinary.com/dshrjyy17/image/upload/v1757314292/iTech_Innovations.jpg_fs5rkz.png" alt="Logo" width={90} height={40}/>
           </Link>
           <p className="text-sm text-muted-foreground">
-            Revolutionizing the future, one device at a time.
+            {/* Revolutionizing the future, one device at a time. */}
           </p>
         </div>
         <div>
@@ -35,11 +35,6 @@ export function Footer() {
           <h3 className="font-headline text-lg font-medium mb-4">Follow Us</h3>
           <div className="flex space-x-4">
             <Button variant="ghost" size="icon" asChild>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                <Twitter className="h-5 w-5 text-muted-foreground" />
-              </a>
-            </Button>
-            <Button variant="ghost" size="icon" asChild>
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <Facebook className="h-5 w-5 text-muted-foreground" />
               </a>
@@ -50,8 +45,13 @@ export function Footer() {
               </a>
             </Button>
             <Button variant="ghost" size="icon" asChild>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/itech-innovations-aa3b5a202/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="h-5 w-5 text-muted-foreground" />
+              </a>
+            </Button>
+            <Button variant="ghost" size="icon" asChild>
+              <a href="https://www.youtube.com/watch?v=yOvBLzM5zys" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <Youtube className="h-5 w-5 text-muted-foreground" />
               </a>
             </Button>
           </div>

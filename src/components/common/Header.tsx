@@ -26,7 +26,7 @@ export function Header() {
         <div className="container flex h-16 max-w-screen-2xl items-center">
           <div className="flex flex-1 items-center">
             <Link href="/" className="mr-6 flex items-center space-x-4">
-              <Image src="/assets/images/Logo2.svg" alt="Logo" width={90} height={40}/>
+              <Image src="https://res.cloudinary.com/dshrjyy17/image/upload/v1757314292/iTech_Innovations.jpg_fs5rkz.png" alt="Logo" width={90} height={40}/>
             </Link>
             <nav className="hidden gap-6 text-sm md:flex">
               {navLinks.map(({ href, label }) => (

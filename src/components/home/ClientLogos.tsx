@@ -1,13 +1,9 @@
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from 'react';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+import type React from 'react';
 import { Sparkles, ArrowLeft, ArrowRight } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
-import { enhanceLogoClarity } from '@/ai/flows/enhance-logo-clarity';
-import { Skeleton } from '../ui/skeleton';
-import { cn } from '@/lib/utils';
+import { Button } from '../ui/button';
 
 interface Logo {
   id: number;
@@ -47,77 +43,162 @@ const urlToDataUri = async (url: string): Promise<string> => {
 };
 
 export default function ClientLogos() {
-  const [logos, setLogos] = useState<Logo[]>(
-    initialLogos.map(logo => ({ ...logo, enhancedSrc: null, isEnhancing: false }))
+  const [logos, setLogos] = useState(
+    initialLogos.map(logo => ({
+      ...logo,
+      enhancedSrc: null,
+      isEnhancing: false
+    }))
   );
   const [isEnhancingAll, setIsEnhancingAll] = useState(false);
-  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set<number>());
   const [isHovered, setIsHovered] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
+  const [isPaused, setIsPaused] = useState(false);
+  
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const scrollPositionRef = useRef(0);
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartScrollRef = useRef(0);
 
-  const handleEnhanceLogos = async () => {
-    setIsEnhancingAll(true);
-    setLogos(logos => logos.map(l => ({ ...l, isEnhancing: true })));
-
-    toast({
-      title: "Enhancing Logos",
-      description: "AI is working its magic. Please wait...",
-    });
-
-    let successCount = 0;
-    const enhancementPromises = logos.map(async (logo) => {
-      try {
-        const logoDataUri = await urlToDataUri(logo.originalSrc);
-        const result = await enhanceLogoClarity({ logoDataUri });
-        setLogos(prevLogos =>
-          prevLogos.map(l =>
-            l.id === logo.id ? { ...l, enhancedSrc: result.enhancedLogoDataUri, isEnhancing: false } : l
-          )
-        );
-        successCount++;
-      } catch (error) {
-        console.error(`Failed to enhance logo for ${logo.name}:`, error);
-        setLogos(prevLogos =>
-          prevLogos.map(l =>
-            l.id === logo.id ? { ...l, isEnhancing: false } : l
-          )
-        );
-      }
-    });
-
-    await Promise.all(enhancementPromises);
+  // const handleEnhanceLogos = async () => {
+  //   setIsEnhancingAll(true);
+  //   setLogos(logos => logos.map(l => ({ ...l, isEnhancing: true })));
     
-    setIsEnhancingAll(false);
-    toast({
-      title: "Enhancement Complete",
-      description: `${successCount} out of ${logos.length} logos were successfully enhanced.`,
-      variant: successCount < logos.length ? 'destructive' : 'default'
-    });
+  //   // Simulate enhancement
+  //   setTimeout(() => {
+  //     setLogos(logos => logos.map(l => ({ 
+  //       ...l, 
+  //       isEnhancing: false,
+  //       enhancedSrc: l.originalSrc // In real app, this would be the enhanced version
+  //     })));
+  //     setIsEnhancingAll(false);
+  //   }, 2000);
+  // };
+
+  // Duplicate logos for seamless scrolling
+  const logosToDisplay = useMemo(() => [...logos, ...logos, ...logos], [logos]);
+
+  // Auto-scroll effect
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current as HTMLDivElement;
+
+    let lastTime = performance.now();
+    const baseSpeed = 30; // pixels per second
+    const hoverSpeed = 10; // slower when hovered
+    
+    const animate = (currentTime: number) => {
+      if (isPaused || isDraggingRef.current || isEnhancingAll) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+        return;
+      }
+
+      const deltaTime = (currentTime - lastTime) / 1000; // Convert to seconds
+      lastTime = currentTime;
+      
+      const speed = isHovered ? hoverSpeed : baseSpeed;
+      const scrollAmount = speed * deltaTime;
+      
+      // Get the actual scroll width of one set of logos
+      const singleSetWidth = container.scrollWidth / 3;
+      
+      // Update scroll position
+      scrollPositionRef.current += scrollAmount;
+      
+      // Reset scroll position for seamless loop
+      if (scrollPositionRef.current >= singleSetWidth) {
+        scrollPositionRef.current -= singleSetWidth;
+      }
+      
+      container.scrollLeft = scrollPositionRef.current;
+      
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isHovered, isPaused, isEnhancingAll]);
+
+  // Mouse handlers for drag functionality
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current as HTMLDivElement;
+    
+    isDraggingRef.current = true;
+    dragStartXRef.current = e.pageX - container.offsetLeft;
+    dragStartScrollRef.current = container.scrollLeft;
+    scrollPositionRef.current = container.scrollLeft;
+    container.style.cursor = 'grabbing';
   };
 
-  const logosToDisplay = useMemo(() => [...logos, ...logos], [logos]);
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current as HTMLDivElement;
+    
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - dragStartXRef.current) * 1.5;
+    const newScrollLeft = dragStartScrollRef.current - walk;
+    container.scrollLeft = newScrollLeft;
+    scrollPositionRef.current = newScrollLeft;
+  };
 
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current as HTMLDivElement;
+    container.style.cursor = 'grab';
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    isDraggingRef.current = false;
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current as HTMLDivElement;
+    container.style.cursor = 'grab';
+  };
+
+  // Manual scroll functions
   const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -200,
-        behavior: 'smooth'
-      });
-    }
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current as HTMLDivElement;
+    
+    setIsPaused(true);
+    const newScrollLeft = Math.max(0, container.scrollLeft - 240);
+    container.scrollTo({
+      left: newScrollLeft,
+      behavior: 'smooth'
+    });
+    scrollPositionRef.current = newScrollLeft;
+    
+    setTimeout(() => setIsPaused(false), 1000);
   };
 
   const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 200,
-        behavior: 'smooth'
-      });
-    }
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current as HTMLDivElement;
+    
+    setIsPaused(true);
+    const newScrollLeft = container.scrollLeft + 240;
+    container.scrollTo({
+      left: newScrollLeft,
+      behavior: 'smooth'
+    });
+    scrollPositionRef.current = newScrollLeft;
+    
+    setTimeout(() => setIsPaused(false), 1000);
   };
 
   return (
-    <section className="py-10 md:py-28 bg-card overflow-x-hidden">
+    <section className="py-16 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-headline">
@@ -126,16 +207,25 @@ export default function ClientLogos() {
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             We partner with leading energy and industrial companies to deliver innovative IoT solutions.
           </p>
-         
+          
+          {/* <button
+            onClick={handleEnhanceLogos}
+            disabled={isEnhancingAll}
+            className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            <Sparkles className="w-5 h-5" />
+            {isEnhancingAll ? 'Enhancing...' : 'Enhance All Logos'}
+          </button> */}
         </div>
-        
+
         <div className="relative group">
           {/* Left Arrow Button */}
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-accent hover:scale-110 transition-all duration-200 opacity-0 group-hover:opacity-100"
             onClick={scrollLeft}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 backdrop-blur-sm shadow-lg hover:bg-accent hover:scale-110 transition-all duration-200 opacity-0 group-hover:opacity-100"
+            aria-label="Scroll left"
           >
             <ArrowLeft className="h-4 w-4" />
             <span className="sr-only">Scroll left</span>
@@ -152,46 +242,43 @@ export default function ClientLogos() {
             <span className="sr-only">Scroll right</span>
           </Button>
 
-          <div 
+          {/* Gradient Masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+
+          {/* Scrollable Container */}
+          <div
             ref={scrollContainerRef}
-            className="w-full overflow-x-hidden overflow-y-hidden max-w-full relative group/scroll"
-            style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}
+            className="overflow-x-hidden cursor-grab select-none"
+            style={{
+              scrollBehavior: 'auto',
+              WebkitOverflowScrolling: 'touch'
+            }}
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseLeave={handleMouseLeave}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
           >
-            <div 
-              className={cn(
-                "flex gap-8 max-w-full overflow-x-hidden overflow-y-hidden",
-                "animate-scroll",
-                isEnhancingAll && "paused",
-                isHovered && "animate-scroll-slow"
-              )}
-            >
+            <div className="flex gap-6 py-4">
               {logosToDisplay.map((logo, index) => (
-                <div 
-                  key={`${logo.id}-${index}`} 
-                  className="flex-shrink-0 w-48 h-32 flex items-center justify-center bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer group/item"
+                <div
+                  key={`${logo.id}-${index}`}
+                  className="flex-shrink-0 w-48 h-32 flex items-center justify-center bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300"
                 >
                   {logo.isEnhancing ? (
-                    <Skeleton className="w-full h-full" />
+                    <div className="w-full h-full bg-gray-200 animate-pulse rounded" />
                   ) : imageErrors.has(logo.id) ? (
-                    <div className="flex items-center justify-center w-full h-full text-gray-500 text-sm group-hover/item:text-gray-700 transition-colors">
+                    <div className="flex items-center justify-center w-full h-full text-gray-500 text-sm">
                       {logo.name}
                     </div>
                   ) : (
-                    <Image
+                    <img
                       src={logo.enhancedSrc || logo.originalSrc}
                       alt={`${logo.name} logo`}
-                      width={180}
-                      height={100}
-                      className="object-contain w-auto h-auto max-h-20 max-w-40 group-hover/item:scale-110 transition-transform duration-300"
-                      data-ai-hint="company logo"
-                      onError={(e) => {
-                        console.error(`Failed to load image: ${logo.originalSrc}`, e);
+                      className="object-contain w-auto h-auto max-h-20 max-w-40"
+                      onError={() => {
                         setImageErrors(prev => new Set(prev).add(logo.id));
-                      }}
-                      onLoad={() => {
-                        console.log(`Successfully loaded image: ${logo.originalSrc}`);
                       }}
                     />
                   )}
