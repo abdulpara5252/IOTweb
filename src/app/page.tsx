@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
+import IoTFeatures from '@/components/home/IoTFeatures';
 import Sectors from '@/components/home/Sectors';
+import Statistics from '@/components/home/Statistics';
 import ClientLogos from '@/components/home/ClientLogos';
 import { AnimatedSection } from '@/components/common/AnimatedSection';
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/seo/StructuredData';
-import ParticleNetworkAnimation from '@/components/common/ParticleNetworkAnimation';
 
 export const metadata: Metadata = generateMetadata({
   title: 'ItechInnovation - Revolutionary IoT Solutions for Smart Connected World',
@@ -27,13 +28,18 @@ export default function Home() {
 
   return (
     <>
-      <ParticleNetworkAnimation />
       <StructuredData data={breadcrumbData} />
       <AnimatedSection>
         <HeroSection />
       </AnimatedSection>
       <AnimatedSection>
+        <IoTFeatures />
+      </AnimatedSection>
+      <AnimatedSection>
         <Sectors />
+      </AnimatedSection>
+      <AnimatedSection>
+        <Statistics />
       </AnimatedSection>
       <AnimatedSection>
         <ClientLogos />

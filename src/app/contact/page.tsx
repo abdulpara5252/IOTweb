@@ -21,7 +21,6 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/seo/StructuredData';
-import ParticleNetworkAnimation from '@/components/common/ParticleNetworkAnimation';
 import GoogleMap from '@/components/common/GoogleMap';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -167,7 +166,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <ParticleNetworkAnimation />
     <div className="container mx-auto px-4 py-16 md:py-24">
       <StructuredData data={breadcrumbData} />
       <StructuredData data={contactData} />

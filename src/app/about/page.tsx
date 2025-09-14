@@ -5,7 +5,6 @@ import { CheckCircle } from "lucide-react";
 import { AnimatedSection } from "@/components/common/AnimatedSection";
 import { generateMetadata, generateStructuredData } from '@/lib/seo';
 import { StructuredData } from '@/components/seo/StructuredData';
-import ParticleNetworkAnimation from '@/components/common/ParticleNetworkAnimation';
 
 export const metadata: Metadata = generateMetadata({
   title: 'About ItechInnovation - Leading IoT Innovation & Smart Technology Solutions',
@@ -73,7 +72,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <ParticleNetworkAnimation />
     <div className="container mx-auto px-4 py-16 md:py-24">
       <StructuredData data={breadcrumbData} />
       <StructuredData data={teamData} />

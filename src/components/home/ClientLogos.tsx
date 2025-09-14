@@ -198,14 +198,27 @@ export default function ClientLogos() {
   };
 
   return (
-    <section className="py-16 bg-gray-50 overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-headline">
-            Trusted by Industry Leaders
+    <section className="py-20 bg-slate-900 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-900/10 via-transparent to-cyan-900/10"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm font-medium mb-6">
+            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+            Trusted Partners
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-headline mb-6 text-white">
+            <span className="neon-text">Trusted by</span>
+            <br />
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              Industry Leaders
+            </span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            We partner with leading energy and industrial companies to deliver innovative IoT solutions.
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            We partner with leading energy and industrial companies worldwide to deliver innovative IoT solutions 
+            that transform operations and drive success.
           </p>
           
           {/* <button
@@ -243,8 +256,8 @@ export default function ClientLogos() {
           </Button>
 
           {/* Gradient Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
 
           {/* Scrollable Container */}
           <div
@@ -264,7 +277,7 @@ export default function ClientLogos() {
               {logosToDisplay.map((logo, index) => (
                 <div
                   key={`${logo.id}-${index}`}
-                  className="flex-shrink-0 w-48 h-32 flex items-center justify-center bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300"
+                  className="flex-shrink-0 w-48 h-32 flex items-center justify-center bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 iot-card-glow border border-slate-700/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300 data-stream"
                 >
                   {logo.isEnhancing ? (
                     <div className="w-full h-full bg-gray-200 animate-pulse rounded" />
